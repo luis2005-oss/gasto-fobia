@@ -1,45 +1,29 @@
-export default function StatCard({
-
-title,
-value,
-color
-
-}){
-
-return(
-
-<div
-className="
+export default function StatCard({ title, value, color }) {
+  return (
+    <div
+      className="
 card
 p-6
 "
->
-
-<p
-className="
+    >
+      <p
+        className="
 text-gray-400
 mb-2
 "
->
+      >
+        {title}
+      </p>
 
-{title}
-
-</p>
-
-<h2
-className={`
+      <h2
+        className={`
 text-3xl
 font-bold
 ${color}
 `}
->
-
-{value}
-
-</h2>
-
-</div>
-
-)
-
+      >
+        {value}
+      </h2>
+    </div>
+  );
 }

@@ -31,6 +31,7 @@ p-6
         >
           {children}
         </main>
+        
       </div>
     </div>
   );
