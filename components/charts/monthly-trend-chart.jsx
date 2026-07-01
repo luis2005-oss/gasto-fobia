@@ -21,7 +21,7 @@ export default function MonthlyTrendChart({ data }) {
       </div>
 
       <div className="w-full h-70 min-w-0">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" aspect={4.5}>
           <BarChart data={data}>
             <XAxis
               dataKey="month"

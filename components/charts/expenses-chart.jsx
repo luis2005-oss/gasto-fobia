@@ -1,22 +1,10 @@
 "use client";
 
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 import { useFinance } from "../../context/finance-context";
 
-const COLORS = [
-  "#2563EB",
-  "#22C55E",
-  "#EF4444",
-  "#F59E0B",
-  "#8B5CF6",
-];
+const COLORS = ["#2563EB", "#22C55E", "#EF4444", "#F59E0B", "#8B5CF6"];
 
 export default function ExpensesChart() {
   const { transactions } = useFinance();
@@ -37,13 +25,11 @@ export default function ExpensesChart() {
 
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6">
-      <h2 className="font-bold mb-6">
-        Gastos por categoría
-      </h2>
+      <h2 className="font-bold mb-6">Gastos por categoría</h2>
 
       <div className="w-full h-75 min-w-0">
         {data.length > 0 ? (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" aspect={2}>
             <PieChart>
               <Pie
                 data={data}
@@ -54,10 +40,7 @@ export default function ExpensesChart() {
                 outerRadius={100}
               >
                 {data.map((_, index) => (
-                  <Cell
-                    key={index}
-                    fill={COLORS[index % COLORS.length]}
-                  />
+                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
 

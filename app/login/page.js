@@ -13,7 +13,9 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
 
-  function entrar() {
+  function entrar(e) {
+    e.preventDefault();
+
     const ok = login({
       email,
       password,
@@ -23,6 +25,7 @@ export default function Login() {
       alert("Correo o contraseña incorrectos");
       return;
     }
+
     router.replace("/dashboard");
   }
 
@@ -53,49 +56,50 @@ export default function Login() {
           </div>
 
           <div className="space-y-5">
-            <div className="relative">
-              <Mail
-                size={18}
-                className="absolute left-4 top-4 text-slate-500"
-              />
+            <form onSubmit={entrar} className="space-y-5">
+              <div className="relative">
+                <Mail
+                  size={18}
+                  className="absolute left-4 top-4 text-slate-500"
+                />
 
-              <input
-                type="email"
-                name="email"
-                autoComplete="email"
-                inputMode="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="correo@ejemplo.com"
-                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
-              />
-            </div>
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="correo@ejemplo.com"
+                  className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
+                />
+              </div>
 
-            <div className="relative">
-              <Lock
-                size={18}
-                className="absolute left-4 top-4 text-slate-500"
-              />
+              <div className="relative">
+                <Lock
+                  size={18}
+                  className="absolute left-4 top-4 text-slate-500"
+                />
 
-              <input
-                type={show ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Contraseña"
-                className="w-full pl-12 pr-12 py-4 rounded-2xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
-              />
+                <input
+                  type={show ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Contraseña"
+                  className="w-full pl-12 pr-12 py-4 rounded-2xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShow(!show)}
+                  className="absolute right-4 top-4"
+                >
+                  {show ? <EyeOff /> : <Eye />}
+                </button>
+              </div>
 
               <button
-                onClick={() => setShow(!show)}
-                className="absolute right-4 top-4"
-              >
-                {show ? <EyeOff /> : <Eye />}
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <button
-                onClick={entrar}
+                type="submit"
                 className="w-full py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 font-semibold transition"
               >
                 Ingresar
@@ -103,9 +107,7 @@ export default function Login() {
 
               <div className="flex items-center gap-4">
                 <div className="flex-1 h-px bg-slate-700" />
-
                 <span className="text-sm text-slate-500">o</span>
-
                 <div className="flex-1 h-px bg-slate-700" />
               </div>
 
@@ -115,7 +117,7 @@ export default function Login() {
               >
                 Crear cuenta con correo
               </Link>
-            </div>
+            </form>
           </div>
         </div>
       </div>
