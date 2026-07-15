@@ -63,12 +63,104 @@ export default function SettingsPage() {
 
   // ── GUARDAR PREFERENCIAS ───────────────────────────────────────────────────
   useEffect(() => {
+<<<<<<< HEAD
     localStorage.setItem("theme", darkMode ? "dark" : "light");
     localStorage.setItem("notifications", JSON.stringify(notifications));
     localStorage.setItem("privacy", JSON.stringify(privacy));
     localStorage.setItem("currency", currency);
     localStorage.setItem("startDay", startDay);
   }, [darkMode, notifications, privacy, currency, startDay]);
+=======
+    const theme = localStorage.getItem("theme");
+    const notify = localStorage.getItem("notifications");
+    const hide = localStorage.getItem("privacy");
+    const moneda = localStorage.getItem("currency");
+    const inicio = localStorage.getItem("startDay");
+
+    if (theme) setDarkMode(theme === "dark");
+
+    if (notify)
+      setNotifications(JSON.parse(notify));
+
+    if (hide)
+      setPrivacy(JSON.parse(hide));
+
+    if (moneda)
+      setCurrency(moneda);
+
+    if (inicio)
+      setStartDay(Number(inicio));
+
+    `loadStorageInfo`();
+  }, []);
+
+  // ============================
+  // GUARDAR CONFIGURACIÓN
+  // ============================
+
+  useEffect(() => {
+    localStorage.setItem(
+      "theme",
+      darkMode ? "dark" : "light"
+    );
+
+    localStorage.setItem("notifications",
+      JSON.stringify(notifications)
+    );
+
+    localStorage.setItem(
+      "privacy",
+      JSON.stringify(privacy)
+    );
+
+    localStorage.setItem(
+      "currency",
+      currency
+    );
+
+    localStorage.setItem(
+      "startDay",
+      startDay
+    );
+  }, [
+    darkMode,
+    notifications,
+    privacy,
+    currency,
+    startDay,
+  ]);
+
+  // ============================
+  // DATOS GUARDADOS
+  // ============================
+
+  const loadStorageInfo = () => {
+    const expenses = JSON.parse(
+      localStorage.getItem("expenses") || "[]"
+    );
+
+    const income = JSON.parse(
+      localStorage.getItem("income") || "[]"
+    );
+
+    const budget =
+      localStorage.getItem("budget") || 0;
+
+    setStorageInfo({
+      expenses: expenses.length,
+      income: income.length,
+      budget,
+    });
+  };
+
+  // ============================
+  // CERRAR SESIÓN
+  // ============================
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+>>>>>>> e34c01f (Actualiza la página de ajustes)
 
   // ── CERRAR SESIÓN ──────────────────────────────────────────────────────────
   const handleLogout = async () => {
@@ -453,3 +545,34 @@ export default function SettingsPage() {
     </div>
   );
 }
+<<<<<<< HEAD
+=======
+
+/* =========================
+   CARD COMPONENT
+========================= */
+
+function Card({ icon, title, darkMode }) {
+  return (
+    <button
+      className={`rounded-3xl border p-6 flex justify-between items-center transition ${
+        darkMode
+          ? "bg-slate-900 border-slate-800"
+          : "bg-gray-100 border-gray-300"
+      }`}
+    >
+      <div className="flex gap-4">
+        <div className="text-blue-500">{icon}</div>
+
+        <div>
+          <h3 className="font-semibold">{title}</h3>
+          <p className="text-sm text-gray-400">
+            Configuración del sistema
+          </p>
+        </div>
+      </div>
+
+      <ChevronRight />
+    </button>
+  )}
+>>>>>>> e34c01f (Actualiza la página de ajustes)
