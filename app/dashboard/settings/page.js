@@ -56,12 +56,12 @@ export default function SettingsPage() {
     return Number(localStorage.getItem("startDay")) || 1;
   });
 
-  // ── MODALES ────────────────────────────────────────────────────────────────
+  // ── MODALES ───
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showDataModal, setShowDataModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
 
-  // ── GUARDAR PREFERENCIAS ───────────────────────────────────────────────────
+  // ── GUARDAR PREFERENCIAS ──
   useEffect(() => {
     localStorage.setItem("theme", darkMode ? "dark" : "light");
     localStorage.setItem("notifications", JSON.stringify(notifications));
@@ -70,13 +70,13 @@ export default function SettingsPage() {
     localStorage.setItem("startDay", startDay);
   }, [darkMode, notifications, privacy, currency, startDay]);
 
-  // ── CERRAR SESIÓN ──────────────────────────────────────────────────────────
+  // ── CERRAR SESIÓN ──
   const handleLogout = async () => {
     await logout();
     router.push("/login");
   };
 
-  // ── EXPORTAR PDF ───────────────────────────────────────────────────────────
+  // ── EXPORTAR PDF ──
   const exportPDF = () => {
     const doc = new jsPDF();
 
@@ -119,7 +119,7 @@ export default function SettingsPage() {
     doc.save("Reporte_Gastos_GastoFobia.pdf");
   };
 
-  // ── EXPORTAR EXCEL ─────────────────────────────────────────────────────────
+  // ── EXPORTAR EXCEL ───
   const exportExcel = () => {
     const gastos = transactions
       .filter((t) => t.type === "expense")
@@ -153,7 +153,7 @@ export default function SettingsPage() {
     XLSX.writeFile(wb, "Reporte_GastoFobia.xlsx");
   };
 
-  // ── BORRAR TODOS LOS DATOS ─────────────────────────────────────────────────
+  // ── BORRAR TODOS LOS DATOS ───
   const handleDeleteAll = async () => {
     // Llama a una API que borre todas las transacciones/presupuestos del usuario
     await Promise.all([
@@ -166,7 +166,7 @@ export default function SettingsPage() {
     router.push("/login");
   };
 
-  // ── CLASES COMPARTIDAS ─────────────────────────────────────────────────────
+  // ── CLASES COMPARTIDAS ─
   const card = `rounded-3xl border p-6 ${
     darkMode ? "bg-slate-900 border-slate-800" : "bg-gray-100 border-gray-300"
   }`;
@@ -337,7 +337,7 @@ export default function SettingsPage() {
         </div>
       </section>
 
-      {/* ── MODAL: EXPORTAR ─────────────────────────────────────────────────── */}
+      {/* ── MODAL: EXPORTAR */}
       {showExportModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-6">
           <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 w-full max-w-sm space-y-4">
@@ -373,7 +373,7 @@ export default function SettingsPage() {
         </div>
       )}
 
-      {/* ── MODAL: RESUMEN DE DATOS ──────────────────────────────────────────── */}
+      {/* ── MODAL: RESUMEN DE DATOS */}
       {showDataModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-6">
           <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 w-full max-w-sm space-y-4">
@@ -426,7 +426,7 @@ export default function SettingsPage() {
         </div>
       )}
 
-      {/* ── MODAL: CONFIRMAR BORRADO ─────────────────────────────────────────── */}
+      {/* ── MODAL: CONFIRMAR BORRADO  */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-6">
           <div className="bg-slate-900 border border-red-800 rounded-3xl p-8 w-full max-w-sm space-y-4">
